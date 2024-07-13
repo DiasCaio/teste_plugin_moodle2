@@ -18,7 +18,7 @@
  * Settings that allow configuration of the image plugin
  *
  * @package    atto_image
- * @copyright  2024 Your Name
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

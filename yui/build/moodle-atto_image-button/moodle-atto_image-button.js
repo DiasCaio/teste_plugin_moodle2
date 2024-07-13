@@ -1,6 +1,29 @@
 YUI.add('moodle-atto_image-button', function (Y, NAME) {
 
 // utils.js
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Atto text editor integration version file.
+ *
+ * @package    atto_image_gen_auto
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 Y.namespace('M.atto_image').Util = {
     _isImage: function(mimeType) {
         return mimeType.indexOf('image/') === 0;
@@ -38,7 +61,31 @@ Y.namespace('M.atto_image').Util = {
         this._toggleAriaInvalid(form, ['.' + CSS.INPUTALT, '.' + CSS.IMAGEPRESENTATION], imagealterror);
         return imagealterror;
     }
-};Y.namespace('M.atto_image').AltGenerator = {
+};// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Atto text editor integration version file.
+ *
+ * @package    atto_image_gen_auto
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+
+Y.namespace('M.atto_image').AltGenerator = {
     /**
      * Generate alternative text for an image using Moodle's server-side script.
      * 
@@ -93,6 +140,7 @@ Y.namespace('M.atto_image').Util = {
 /*
  * @package    atto_image
  * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -746,7 +794,7 @@ Y.namespace('M.atto_image').Button = Y.Base.create('button', Y.M.editor_atto.Edi
         this._form.one('.' + CSS.INPUTALT).on('keyup', this._handleKeyup, this);
 
         var altField = this._form.one('.' + CSS.INPUTALT);
-        altField.setAttribute('placeholder', 'Enter manually or generate automatically by clicking the button'); 
+        altField.setAttribute('placeholder', 'Enter manually '); 
 
         var languageSelector = this._form.one('.' + CSS.LANGUAGESELECTOR);
         if (languageSelector) {

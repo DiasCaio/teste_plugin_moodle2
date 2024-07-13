@@ -19,7 +19,7 @@
  *
  * @package     atto_image
  * @category    access
- * @copyright   2024 Your Name <your@email.com>
+ * @copyright   2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

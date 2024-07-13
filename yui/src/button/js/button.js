@@ -16,6 +16,7 @@
 /*
  * @package    atto_image
  * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -669,7 +670,7 @@ Y.namespace('M.atto_image').Button = Y.Base.create('button', Y.M.editor_atto.Edi
         this._form.one('.' + CSS.INPUTALT).on('keyup', this._handleKeyup, this);
 
         var altField = this._form.one('.' + CSS.INPUTALT);
-        altField.setAttribute('placeholder', 'Enter manually or generate automatically by clicking the button'); 
+        altField.setAttribute('placeholder', 'Enter manually '); 
 
         var languageSelector = this._form.one('.' + CSS.LANGUAGESELECTOR);
         if (languageSelector) {

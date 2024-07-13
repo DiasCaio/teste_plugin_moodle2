@@ -19,6 +19,7 @@
  *
  * @package    atto_image
  * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -82,14 +83,13 @@ function atto_image_params_for_js($elementid, $options, $fpoptions) {
     }
 
     $params = array(
-        'apikey' => get_config('atto_image', 'apikey'),
         'model' => get_config('atto_image', 'model'),
         'max_tokens' => get_config('atto_image', 'max_tokens'),
         'languages' => $formattedLanguages
     );
 
     // Debug output
-    debugging('Atto Image params: ' . json_encode($params), DEBUG_DEVELOPER);
+    //debugging('Atto Image params: ' . json_encode($params), DEBUG_DEVELOPER);
 
     return $params;
 }

@@ -19,12 +19,13 @@
  *
  * @package    atto_image
  * @copyright  2013 Damyon Wiese  <damyon@moodle.com>
+ * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2024071301;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2024071303;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2024041601;        // Requires this Moodle version.
 $plugin->component = 'atto_image';  // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_ALPHA;
