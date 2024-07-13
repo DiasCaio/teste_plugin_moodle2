@@ -670,7 +670,7 @@ Y.namespace('M.atto_image').Button = Y.Base.create('button', Y.M.editor_atto.Edi
         this._form.one('.' + CSS.INPUTALT).on('keyup', this._handleKeyup, this);
 
         var altField = this._form.one('.' + CSS.INPUTALT);
-        altField.setAttribute('placeholder', 'Enter manually '); 
+        altField.setAttribute('placeholder', 'Enter manually or generate automatically by clicking the button');
 
         var languageSelector = this._form.one('.' + CSS.LANGUAGESELECTOR);
         if (languageSelector) {
