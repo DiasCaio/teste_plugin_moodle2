@@ -1,0 +1,12 @@
+{
+  "name": "moodle-atto_image-button",
+  "builds": {
+    "moodle-atto_image-button": {
+      "jsfiles": [
+        "utils.js",
+        "altgenerator.js",
+        "button.js"
+      ]
+    }
+  }
+}
