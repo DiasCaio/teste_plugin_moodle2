@@ -1,5 +1,8 @@
 # Atto Image Plugin with AI-Powered Alt Text Generation
 
+## Small Description
+
+The Atto Image Plugin for Moodle, originally developed to facilitate image insertion and manipulation in the text editor, has been enhanced with AI-powered capabilities. This extended version now offers automatic alt text generation using OpenAI-compatible Language Models
 ## Original Functionality (2013)
 The original Atto Image plugin, developed by Damyon Wiese in 2013, provides essential image insertion and manipulation features for the Moodle text editor. Key features include:
 
