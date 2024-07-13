@@ -66,6 +66,10 @@ When inserting or editing an image, users now have the option to automatically g
 
 ![Settings Interface](/assetsmarkdown/Settings_interface.PNG)
 
+
+## Compiling  
+
+- Running `\server\moodle\lib\editor\atto\plugins\image> npx grunt shifter`
 ---
 
 This extension enhances accessibility and saves time for content creators by providing AI-generated, multilingual alt text for images in Moodle.
