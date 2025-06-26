@@ -116,20 +116,46 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_languages') {
 
 
 $imageurl = required_param('imageurl', PARAM_URL);
-$language = required_param('language', PARAM_ALPHA);
-$category = required_param('category', PARAM_TEXT);
+$language = required_param('language', PARAM_ALPHANUMEXT);
+$tipo_imagem = required_param('tipoimagem', PARAM_TEXT);
 // Get rate limiting settings
 $rate_limit_max = get_config('atto_image', 'rate_limit_max');
 $rate_limit_time = get_config('atto_image', 'rate_limit_time');
 
-// Get available languages and prompts
-$languages = json_decode(get_config('atto_image', 'languages'), true);
-if (!isset($languages[$language])) {
+// Validate language
+$allowed_languages = ['en', 'pt-br', 'es'];
+if (!in_array(strtolower($language), $allowed_languages)) {
     echo json_encode(['error' => 'Invalid language selected']);
     die();
 }
 
-$prompt = $languages[$language];
+$prompt_template = <<<'EOD'
+Você é um assistente de acessibilidade visual especializado em descrever imagens para pessoas com deficiência visual.
+
+A aplicação enviará duas variáveis:
+• {{tipo_imagem}} – tipo da imagem (ex.: “foto”, “pintura”, “print de conversa”, “equação”, “gráfico”, etc.).
+• {{idioma_descricao}} – idioma em que a descrição deve ser respondida (ex.: “pt-BR”, “en”, “es”, “fr”).
+
+Ao receber a imagem, junto com {{tipo_imagem}} e {{idioma_descricao}}:
+
+1. Responda **somente** com a descrição, usando o idioma definido em {{idioma_descricao}}.
+2. Adapte a descrição ao tipo indicado em {{tipo_imagem}}:
+   • **Foto** – mencione iluminação, foco, expressões faciais e cores realistas.
+   • **Pintura / Ilustração** – destaque estilo artístico, pinceladas, paleta de cores e atmosfera.
+   • **Print de conversa** – comece com “print de conversa” e identifique cada falante seguido do texto (ex.: “Alice: ‘Oi, tudo bem?’”).
+   • **Equação** – leia em voz, explicitando operadores, expoentes e igualdade (ex.: “x ao quadrado mais dois x menos um igual zero”).
+   • **Gráfico / Tabela / Diagrama** – descreva título, eixos, unidades, tendências e valores-chave.
+   • **Outros tipos** – descreva elementos visuais, cores e disposição conforme pertinente.
+3. Diretrizes gerais:
+   • Use linguagem clara e objetiva no idioma solicitado.
+   • Forneça cenário, objetos, pessoas, cores relevantes e ações, sem suposições além do visível.
+   • Caso haja texto na imagem, transcreva-o fielmente no idioma original, indicando posição (ex.: “no canto superior esquerdo, o texto ‘Boas-vindas’”).
+4. Não use palavras como “imagem”, “foto” ou “arquivo”; inicie a resposta diretamente com a descrição do conteúdo.
+
+Aguarde a imagem e gere apenas a descrição conforme as instruções acima.
+EOD;
+
+$prompt = str_replace(['{{tipo_imagem}}','{{idioma_descricao}}'], [$tipo_imagem, $language], $prompt_template);
 
 // Implement rate limiting
 $cache = cache::make('atto_image', 'requests');
@@ -234,7 +260,7 @@ $payload = [
             ]
         ]
     ],
-    'category' => $category,
+    'category' => $tipo_imagem,
     'generationConfig' => [
         'maxOutputTokens' => (int)$max_tokens
     ]

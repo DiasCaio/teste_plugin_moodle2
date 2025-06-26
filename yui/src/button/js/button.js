@@ -152,12 +152,15 @@ var CSS = {
                         '<option value="{{code}}">{{name}}</option>' +
                     '{{/each}}' +
                 '</select>' +
-                '<label for="{{elementid}}_{{CSS.CATEGORYSELECTOR}}">Category</label>' +
-                '<select class="form-control {{CSS.CATEGORYSELECTOR}}" id="{{elementid}}_{{CSS.CATEGORYSELECTOR}}">' +
-                    '<option value="general">General</option>' +
-                    '<option value="nature">Nature</option>' +
-                    '<option value="technology">Technology</option>' +
-                '</select>' +
+                '<label>Tipo da imagem</label>' +
+                '<div class="{{CSS.CATEGORYSELECTOR}}">' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="foto" checked> Foto</div>' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="pintura"> Pintura/Ilustração</div>' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="print de conversa"> Print de conversa</div>' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="equação"> Equação</div>' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="gráfico"> Gráfico/Tabela/Diagrama</div>' +
+                    '<div class="form-check"><input class="form-check-input" type="radio" name="tipoimagem" value="outros"> Outros</div>' +
+                '</div>' +
             '</div>' +
             '<div class="mb-1">' +
                 '<button class="btn btn-secondary {{CSS.GENERATEALT}}" type="button">{{get_string "generatealt" component}} ({{currentLanguage}})</button>' +
@@ -779,17 +782,21 @@ Y.namespace('M.atto_image').Button = Y.Base.create('button', Y.M.editor_atto.Edi
         var altField = this._form.one('.' + CSS.INPUTALT);
         var urlField = this._form.one('.' + CSS.INPUTURL);
         var languageSelect = this._form.one('.' + CSS.LANGUAGESELECTOR);
-        var categorySelect = this._form.one('.' + CSS.CATEGORYSELECTOR);
+        var tipoSelect = this._form.one('.' + CSS.CATEGORYSELECTOR);
         var url = urlField.get('value');
         var language = languageSelect.get('value');
-        var category = categorySelect ? categorySelect.get('value') : '';
+        var tipoimagem = '';
+        if (tipoSelect) {
+            var checked = tipoSelect.one('input[type=radio]:checked');
+            tipoimagem = checked ? checked.get('value') : '';
+        }
     
         if (url) {
             // Show a loading indicator
             altField.set('value', 'Generating alt text...');
             this._handleKeyup();  // Update character count
     
-            Y.M.atto_image.AltGenerator.generateAltText(url, language, category).then(function(altText) {
+            Y.M.atto_image.AltGenerator.generateAltText(url, language, tipoimagem).then(function(altText) {
                 altField.set('value', altText);
                 this._handleKeyup();  // Update character count
             }.bind(this)).catch(function(error) {
