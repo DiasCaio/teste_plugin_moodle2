@@ -117,6 +117,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_languages') {
 
 $imageurl = required_param('imageurl', PARAM_URL);
 $language = required_param('language', PARAM_ALPHA);
+$category = required_param('category', PARAM_TEXT);
 // Get rate limiting settings
 $rate_limit_max = get_config('atto_image', 'rate_limit_max');
 $rate_limit_time = get_config('atto_image', 'rate_limit_time');
