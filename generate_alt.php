@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Generate alt text for image using OpenAI API
+ * Generate alt text for image using Google AI Studio API
  *
  * @package    atto_image
  * @copyright  2024 Ries Patrick  <pat.3111997@gmail.com>
@@ -117,6 +117,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'get_languages') {
 
 $imageurl = required_param('imageurl', PARAM_URL);
 $language = required_param('language', PARAM_ALPHA);
+$category = required_param('category', PARAM_TEXT);
 // Get rate limiting settings
 $rate_limit_max = get_config('atto_image', 'rate_limit_max');
 $rate_limit_time = get_config('atto_image', 'rate_limit_time');
@@ -209,59 +210,51 @@ if (!in_array($mimetype, $supported_mimetypes)) {
     die();
 }
 
-// Prepare OpenAI API request
-$apikey = get_config('atto_image', 'apikey');
-$apiurl = get_config('atto_image', 'apiurl');
-$model = get_config('atto_image', 'model');
+// Prepare Google AI API request
+$apikey = get_config('atto_image', 'google_api_key');
+$apiurl = get_config('atto_image', 'google_api_url');
 $max_tokens = get_config('atto_image', 'max_tokens');
 $detail = get_config('atto_image', 'detail');
-if (!$apikey || !$apiurl || !$model || !$prompt || !$max_tokens) {
-    echo json_encode(['error' => 'Missing configuration for OpenAI API']);
+if (!$apikey || !$apiurl || !$prompt || !$max_tokens) {
+    echo json_encode(['error' => 'Missing configuration for Google AI API']);
     die();
 }
 
-$image_content = [
-    "type" => "image_url",
-    "image_url" => [
-        "url" => "data:{$mimetype};base64,{$base64image}"
-    ]
-];
-
-// Add detail parameter if it's not set to 'none'
-if ($detail !== 'none') {
-    $image_content["image_url"]["detail"] = $detail;
-}
-
 $payload = [
-    "model" => $model,
-    "messages" => [
+    'contents' => [
         [
-            "role" => "user",
-            "content" => [
+            'parts' => [
+                ['text' => $prompt],
                 [
-                    "type" => "text",
-                    "text" => $prompt
-                ],
-                $image_content
+                    'inlineData' => [
+                        'mimeType' => $mimetype,
+                        'data' => $base64image
+                    ]
+                ]
             ]
         ]
     ],
-    "max_tokens" => (int)$max_tokens
+    'category' => $category,
+    'generationConfig' => [
+        'maxOutputTokens' => (int)$max_tokens
+    ]
 ];
 
 $debug_info['detail_setting'] = $detail;
 
+$endpoint = rtrim($apiurl, '?');
+$endpoint .= (strpos($endpoint, '?') === false ? '?key=' : '&key=') . urlencode($apikey);
+
 $curl = new curl();
 $curl->setHeader('Content-Type: application/json');
-$curl->setHeader("Authorization: Bearer {$apikey}");
-$response = $curl->post($apiurl, json_encode($payload));
+$response = $curl->post($endpoint, json_encode($payload));
 
 $result = json_decode($response, true);
 
-// At the end of the script, handle the successful case:
-if (isset($result['choices'][0]['message']['content'])) {
+// Handle the successful case
+if (isset($result['candidates'][0]['content']['parts'][0]['text'])) {
     echo json_encode([
-        'alttext' => $result['choices'][0]['message']['content'],
+        'alttext' => $result['candidates'][0]['content']['parts'][0]['text'],
         'debug_info' => $debug_info
     ]);
 } else {
