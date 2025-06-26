@@ -52,8 +52,8 @@ $string['apikey'] = 'OpenAI API Key';
 $string['apikey_desc'] = 'Enter your OpenAI API key';
 $string['apiurl'] = 'OpenAI API URL';
 $string['apiurl_desc'] = 'Enter the OpenAI API URL (default: https://api.openai.com/v1/chat/completions)';
-$string['model'] = 'OpenAI Model';
-$string['model_desc'] = 'Enter the OpenAI model to use for generating alt text (e.g., gpt-4-vision-preview)';
+$string['model'] = 'AI Model';
+$string['model_desc'] = 'Enter the model to use for generating alt text (e.g., gemini-pro-vision)';
 $string['prompt'] = 'Basic Prompt';
 $string['prompt_desc'] = 'Enter the basic prompt for generating alt text';
 $string['max_tokens'] = 'Max Tokens';
@@ -76,9 +76,17 @@ $string['generatealt'] = 'Generate Alt Text';
 $string['languages'] = 'Available Languages';
 $string['languages_desc'] = 'Enter available languages and their prompts in JSON format. Example: {"en":"Generate a concise alternative description for the image in English.","es":"Genera una descripción alternativa concisa para la imagen en español."}';
 $string['select_language'] = 'Select language';
+<<<<<<< codex/adicionar-campos-ao-settings.php-e-traduções
 $string['google_apikey'] = 'Google API Key';
 $string['google_apikey_desc'] = 'Enter your Google Vision API key';
 $string['google_apiurl'] = 'Google API URL';
 $string['google_apiurl_desc'] = 'Enter the Google Vision API URL';
 $string['categories'] = 'Default Categories';
 $string['categories_desc'] = 'Enter default image categories in JSON format. Example: {"photo":"Photo","screenshot":"Screenshot"}';
+=======
+$string['googleapikey'] = 'Google AI API Key';
+$string['googleapikey_desc'] = 'Enter your Google AI Studio API key';
+$string['googleapiurl'] = 'Google AI API URL';
+$string['googleapiurl_desc'] = 'Enter the Google AI Studio API URL (default: https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent)';
+$string['category'] = 'Category';
+>>>>>>> master

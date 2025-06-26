@@ -52,6 +52,7 @@ var CSS = {
         ALIGNSETTINGS: 'atto_image_button',
         GENERATEALT: 'atto_image_generate_alt',
         LANGUAGESELECTOR: 'atto_image_language_selector',
+        CATEGORYSELECTOR: 'atto_image_category_selector',
         GENERATEALT: 'atto_image_generate_alt'
     },
     FORMNAMES = {
@@ -150,6 +151,12 @@ var CSS = {
                     '{{#each languages}}' +
                         '<option value="{{code}}">{{name}}</option>' +
                     '{{/each}}' +
+                '</select>' +
+                '<label for="{{elementid}}_{{CSS.CATEGORYSELECTOR}}">Category</label>' +
+                '<select class="form-control {{CSS.CATEGORYSELECTOR}}" id="{{elementid}}_{{CSS.CATEGORYSELECTOR}}">' +
+                    '<option value="general">General</option>' +
+                    '<option value="nature">Nature</option>' +
+                    '<option value="technology">Technology</option>' +
                 '</select>' +
             '</div>' +
             '<div class="mb-1">' +
@@ -772,15 +779,17 @@ Y.namespace('M.atto_image').Button = Y.Base.create('button', Y.M.editor_atto.Edi
         var altField = this._form.one('.' + CSS.INPUTALT);
         var urlField = this._form.one('.' + CSS.INPUTURL);
         var languageSelect = this._form.one('.' + CSS.LANGUAGESELECTOR);
+        var categorySelect = this._form.one('.' + CSS.CATEGORYSELECTOR);
         var url = urlField.get('value');
         var language = languageSelect.get('value');
+        var category = categorySelect ? categorySelect.get('value') : '';
     
         if (url) {
             // Show a loading indicator
             altField.set('value', 'Generating alt text...');
             this._handleKeyup();  // Update character count
     
-            Y.M.atto_image.AltGenerator.generateAltText(url, language).then(function(altText) {
+            Y.M.atto_image.AltGenerator.generateAltText(url, language, category).then(function(altText) {
                 altField.set('value', altText);
                 this._handleKeyup();  // Update character count
             }.bind(this)).catch(function(error) {

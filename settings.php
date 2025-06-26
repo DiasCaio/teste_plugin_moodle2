@@ -28,23 +28,35 @@ $ADMIN->add('editoratto', new admin_category('atto_image', new lang_string('plug
 
 $settings = new admin_settingpage('atto_image_settings', new lang_string('settings', 'atto_image'));
 if ($ADMIN->fulltree) {
-    // API Key setting
+    // OpenAI API Key setting
     $settings->add(new admin_setting_configtext('atto_image/apikey',
         get_string('apikey', 'atto_image'),
         get_string('apikey_desc', 'atto_image'),
         '', PARAM_TEXT));
 
-    // API URL setting
+    // OpenAI API URL setting
     $settings->add(new admin_setting_configtext('atto_image/apiurl',
         get_string('apiurl', 'atto_image'),
         get_string('apiurl_desc', 'atto_image'),
         'https://api.openai.com/v1/chat/completions', PARAM_URL));
 
+    // Google AI API Key setting
+    $settings->add(new admin_setting_configtext('atto_image/google_api_key',
+        get_string('googleapikey', 'atto_image'),
+        get_string('googleapikey_desc', 'atto_image'),
+        '', PARAM_TEXT));
+
+    // Google AI API URL setting
+    $settings->add(new admin_setting_configtext('atto_image/google_api_url',
+        get_string('googleapiurl', 'atto_image'),
+        get_string('googleapiurl_desc', 'atto_image'),
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent', PARAM_URL));
+
     // Model setting (now allows custom input)
     $settings->add(new admin_setting_configtext('atto_image/model',
         get_string('model', 'atto_image'),
         get_string('model_desc', 'atto_image'),
-        'gpt-4-vision-preview', PARAM_TEXT));
+        'gemini-pro-vision', PARAM_TEXT));
 
     // Basic Prompt setting
     // Uncomment this if you want to allow customization of the basic prompt

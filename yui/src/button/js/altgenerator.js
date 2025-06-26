@@ -31,14 +31,14 @@ Y.namespace('M.atto_image').AltGenerator = {
      * @param {String} language The selected language code
      * @return {Promise} A promise that resolves with the generated alt text
      */
-    generateAltText: function(imageUrl, language) {
+    generateAltText: function(imageUrl, language, category) {
         return new Promise(function(resolve, reject) {
             Y.io(M.cfg.wwwroot + '/lib/editor/atto/plugins/image/generate_alt.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                data: 'sesskey=' + M.cfg.sesskey + '&imageurl=' + encodeURIComponent(imageUrl) + '&language=' + encodeURIComponent(language),
+                data: 'sesskey=' + M.cfg.sesskey + '&imageurl=' + encodeURIComponent(imageUrl) + '&language=' + encodeURIComponent(language) + '&category=' + encodeURIComponent(category),
                 on: {
                     success: function(id, response) {
                         try {
