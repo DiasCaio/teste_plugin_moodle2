@@ -2,7 +2,7 @@
 
 ## Small Description
 
-The Atto Image Plugin for Moodle, originally developed to facilitate image insertion and manipulation in the text editor, has been enhanced with AI-powered capabilities. This extended version now offers automatic alt text generation using OpenAI-compatible Language Models
+The Atto Image Plugin for Moodle, originally developed to facilitate image insertion and manipulation in the text editor, has been enhanced with AI-powered capabilities. This extended version now offers automatic alt text generation using Google AI Studio
 ## Original Functionality (2013)
 The original Atto Image plugin, developed by Damyon Wiese in 2013, provides essential image insertion and manipulation features for the Moodle text editor. Key features include:
 
@@ -14,10 +14,10 @@ The original Atto Image plugin, developed by Damyon Wiese in 2013, provides esse
 - Image preview
 
 ## New AI-Powered Extensions (2024)
-In 2024, Ries Patrick extended the plugin to include AI-powered alt text generation using OpenAI-compatible Language Models (LLMs). The new features include:
+In 2024, Ries Patrick extended the plugin to include AI-powered alt text generation using Google AI Studio. The new features include:
 
 1. **Automatic Alt Text Generation**: 
-   - Utilizes OpenAI-compatible APIs to generate descriptive alt text for images.
+   - Utilizes Google AI Studio to generate descriptive alt text for images.
    - Supports multiple languages for alt text generation.
 
 2. **Language Selection**:
@@ -51,17 +51,23 @@ In 2024, Ries Patrick extended the plugin to include AI-powered alt text generat
 
 Administrators can configure the plugin through the Moodle admin interface, including:
 
-- API key for the OpenAI-compatible service
-- API URL
+- API key for the Google AI Studio
+- Google AI Studio API URL
 - Model selection
 - Maximum tokens for generation
 - Rate limiting settings
 - Image scaling parameters
 - Language options for alt text generation
+- Category prompts (JSON mapping of category codes to prompts)
 
 ## Usage
 
-When inserting or editing an image, users now have the option to automatically generate alt text. They can select the desired language and click a button to generate the alt text, which is then automatically inserted into the alt text field.
+Users can generate alt text through the following flow:
+1. Insert or edit an image in the editor.
+2. Click the alt text generation button.
+3. Choose the desired category (language or style).
+4. The plugin sends the image to Google AI Studio using the configured API key and URL.
+5. The generated text is automatically placed in the alt text field.
 
 ![Default Interface](/assetsmarkdown/default_interface.PNG)
 
