@@ -114,6 +114,32 @@ if ($ADMIN->fulltree) {
         $default_languages,
         PARAM_RAW
     ));
+
+    // Google Vision API Key setting
+    $settings->add(new admin_setting_configtext('atto_image/google_apikey',
+        get_string('google_apikey', 'atto_image'),
+        get_string('google_apikey_desc', 'atto_image'),
+        '', PARAM_TEXT));
+
+    // Google Vision API URL setting
+    $settings->add(new admin_setting_configtext('atto_image/google_apiurl',
+        get_string('google_apiurl', 'atto_image'),
+        get_string('google_apiurl_desc', 'atto_image'),
+        '', PARAM_URL));
+
+    // Default categories setting
+    $default_categories = json_encode([
+        'photo' => 'Photo',
+        'screenshot' => 'Screenshot',
+        'illustration' => 'Illustration',
+        'icon' => 'Icon'
+    ]);
+    $settings->add(new admin_setting_configtextarea('atto_image/categories',
+        get_string('categories', 'atto_image'),
+        get_string('categories_desc', 'atto_image'),
+        $default_categories,
+        PARAM_RAW
+    ));
 }
 
 $ADMIN->add('editoratto', $settings);
