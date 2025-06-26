@@ -79,7 +79,7 @@ function atto_image_params_for_js($elementid, $options, $fpoptions) {
 
     $formattedLanguages = [];
     foreach ($languages as $code => $prompt) {
-        $formattedLanguages[] = ['code' => $code, 'name' => strtoupper($code) . ' - ' . substr($prompt, 0, 30) . '...'];
+        $formattedLanguages[] = ['code' => $code, 'name' => strtoupper($code)];
     }
 
     $params = array(

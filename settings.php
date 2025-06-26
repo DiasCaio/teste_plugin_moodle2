@@ -107,7 +107,11 @@ if ($ADMIN->fulltree) {
     ));
 
     // Languages setting
-    $default_languages = json_encode(['en' => 'Generate a concise alternative description for the image in English.']);
+    $default_languages = json_encode([
+        'en' => 'English',
+        'pt-br' => 'Português',
+        'es' => 'Español'
+    ]);
     $settings->add(new admin_setting_configtextarea('atto_image/languages',
         get_string('languages', 'atto_image'),
         get_string('languages_desc', 'atto_image'),
